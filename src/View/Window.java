@@ -3,10 +3,11 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Graphics.*;
+import java.io.FileNotFoundException;
 
 public class Window extends JFrame {
 
-    public Window(int width, int height){
+    public Window(int width, int height) throws FileNotFoundException {
         super();
         JFrame frame = new JFrame();
         MyPanel myPanel = new MyPanel();
