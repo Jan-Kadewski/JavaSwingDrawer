@@ -6,19 +6,25 @@ import java.awt.Graphics.*;
 import java.io.FileNotFoundException;
 
 public class Window extends JFrame {
-
+    public JFrame frame = null;
     public Window(int width, int height) throws FileNotFoundException {
         super();
-        JFrame frame = new JFrame();
-        MyPanel myPanel = new MyPanel();
+        frame = new JFrame();
         frame.setSize(width,height);
         frame.setVisible(true);
         frame.setTitle("Jan_Kadewski_APP");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.add(myPanel);
     }
 
-
+    public void setDrawer(JFrame frame){
+        MyPanelDrawer myPanelDrawer = null;
+        try {
+            myPanelDrawer = new MyPanelDrawer();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        frame.add(myPanelDrawer);
+    }
 }
 
 
