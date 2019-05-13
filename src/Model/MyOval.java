@@ -1,5 +1,7 @@
 package Model;
 
+import com.google.gson.Gson;
+
 public class MyOval {
 
     public int widthOval;
@@ -11,9 +13,10 @@ public class MyOval {
     public int colorB;
 
 
+/*
     @Override
     public String toString() {
-        return  "{\"MyOval\":{" +
+        return   "{" +
                 "\"widthOval\":" + widthOval + ","+
                 "\"heightOval\":" + heightOval + ","+
                 "\"xOval\":" + xOval + ","+
@@ -21,9 +24,13 @@ public class MyOval {
                 "\"colorR\":" + colorR + ","+
                 "\"colorG\":" + colorG + ","+
                 "\"colorB\":" + colorB +
-                "}}";
+                "}";
     }
-
+*/
+        public String toStringJson(){
+            Gson g = new Gson();
+            return g.toJson(this);
+        }
     MyOval(int width, int height, int x, int y, int R, int G, int B){
         this.widthOval = width;
         this.heightOval = height;

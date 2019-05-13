@@ -1,17 +1,44 @@
 package View;
+
+import Model.MyOval;
 import Model.MyRectangle;
 import Model.State;
+import com.google.gson.Gson;
+import jdk.nashorn.internal.parser.JSONParser;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 
-public class MyPanelDrawer extends JPanel {
-        State state = null;
+public class MyPanelViewer extends JPanel {
 
-        public MyPanelDrawer(State state) throws FileNotFoundException {
-            this.state= state;
-            repaint();
+    MyOval myOval = null;
+
+    public MyPanelViewer(State state) throws IOException {
+
+        String resultFromFile = state.readFromFile();
+        Gson g = new Gson();
+        myOval = g.fromJson(resultFromFile,MyOval.class);
+        repaint();
+
+    }
+
+    public void paint(Graphics g){
+
+        g.setColor(new Color(myOval.colorR,myOval.colorG,myOval.colorB));
+        g.fillOval(myOval.xOval,
+                   myOval.yOval,
+                   myOval.widthOval,
+                   myOval.heightOval);
+    }
+}
+
+
+
+
+/*
+*             repaint();
         }
 
         public void paint(Graphics g){
@@ -33,3 +60,4 @@ public class MyPanelDrawer extends JPanel {
             );
         }
 }
+*/

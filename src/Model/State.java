@@ -1,13 +1,7 @@
 package Model;
 
 
-import javafx.scene.shape.Path;
-import java.util.ArrayList;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
 
 public class State {
     final String PATH_TO_FILE = "drewObjects.txt";
@@ -21,13 +15,13 @@ public class State {
 
     public State() throws FileNotFoundException {
         myRectangle = new MyRectangle(
-                                (int) Math.floor(Math.random()*200 +100),
-                                (int) Math.floor(Math.random()*200 +100),
-                                (int) Math.floor(Math.random()*400 +100),
-                                (int) Math.floor(Math.random()*400 +100),
-                                (int)Math.floor(Math.random()*255), //R
-                                (int)Math.floor(Math.random()*255), //G
-                                (int)Math.floor(Math.random()*255)  //B
+                (int) Math.floor(Math.random()*200 +100),
+                (int) Math.floor(Math.random()*200 +100),
+                (int) Math.floor(Math.random()*400 +100),
+                (int) Math.floor(Math.random()*400 +100),
+                (int)Math.floor(Math.random()*255), //R
+                (int)Math.floor(Math.random()*255), //G
+                (int)Math.floor(Math.random()*255)  //B
 
         );
 
@@ -44,11 +38,17 @@ public class State {
     }
 
 
+
+
+
+
     void saveToFile() throws FileNotFoundException {
         PrintWriter out = null;
         try {
             out = new PrintWriter(PATH_TO_FILE);
-            out.println(this.myOval.toString());
+
+            out.println(this.myOval.toStringJson());
+
         } catch (Exception ex) {
             System.out.println(ex);
         } finally {
@@ -56,8 +56,8 @@ public class State {
         }
     }
 
-
-    ArrayList<String> readFromFile(){
+/*
+    public ArrayList<String> readFromFile(){
         Path path = (Path) Paths.get(PATH_TO_FILE);
         Charset charset = Charset.forName("Utf-8");
         ArrayList<String> lines = null;
@@ -71,7 +71,31 @@ public class State {
             System.out.println(ex);
         }
         return lines;
+    }*/
+
+
+
+    public String readFromFile() throws IOException {
+
+
+        File file = new File(PATH_TO_FILE);
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+/* TODO: it works only for multiline
+        String st;
+        while ((st = br.readLine()) != null)
+            System.out.println(st);
+        return st;*/
+
+        return br.readLine();
+
+
     }
+
+
 }
+
+
+
 
 
